@@ -5,7 +5,9 @@
 class Bus : public Car
 {
 public:
-	Bus();
+
+	Bus(Route* route, size_t num);
 	~Bus(void);
+
 };
 

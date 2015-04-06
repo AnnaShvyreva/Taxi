@@ -9,6 +9,7 @@ class Route;
 class Station
 {
 public:
+
 	Station(std::string str);
 	virtual ~Station(void);
 
@@ -17,7 +18,7 @@ public:
 	//size_t WaitingPassCounte ();
 	void WritingPass();
 
-	std::string GetName() const
+	std::string get_name() const
 	{
 		return name_;
 	}

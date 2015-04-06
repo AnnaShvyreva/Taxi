@@ -5,15 +5,15 @@
 class Passenger
 {
 public:
+
 	Passenger(std::string name, size_t destination);
 	~Passenger(void);
 
-	size_t ReturnDestination() //const
+	size_t get_destination() //const
 	{
 		return destination_;
 	}
-
-	std::string Get_Name() const
+	std::string get_name() const
 	{
 		return passName_;
 	}

@@ -1,5 +1,5 @@
 #include "Station.h"
-#include "Route.h"
+//#include "Route.h"
 #include <iostream>
 
 Station::Station(std::string stname)
@@ -26,17 +26,20 @@ void Station::TakePasseger(Car* car) //проверка, какого пассажира брать, если он
 {
 	for (int i = 0; i<waitingPassenger_->size();i++)
 	{
-		int currentDestination = waitingPassenger_->at(i)->ReturnDestination();
-		int st = car->nowStation -1;
-		int result = currentDestination - st;
-		if (((currentDestination - st <0) && car->direction==UP) || 
-			((currentDestination - st >0) && car->direction==DOWN))
+		int currentDestination = waitingPassenger_->at(i)->get_destination();
+		int st = car->get_now_station()-1;
+		//int result = currentDestination - st;
+		if (((currentDestination - st <0) && car->get_direction()==UP) || 
+			((currentDestination - st >0) && car->get_direction()==DOWN))
 		{
-			if (car->Available_Seat())
+			if ((car->get_now_station()-1 - (*waitingPassenger_)[i]->get_destination())%(car->get_step())==0)
 			{
-				car ->add_inCar((*waitingPassenger_)[i]);
-				(*waitingPassenger_).erase((*waitingPassenger_).begin() + i);
-				i--;
+				if (car->Available_Seat())
+				{
+					car ->add_inCar((*waitingPassenger_)[i]);
+					(*waitingPassenger_).erase((*waitingPassenger_).begin() + i);
+					i--;
+				}
 			}
 		}		
 	}
@@ -46,8 +49,8 @@ void Station::WritingPass()
 {
 	for (size_t i=0; i< (*waitingPassenger_).size(); i++)
 	{
-		std:: cout << (*waitingPassenger_)[i] ->Get_Name() << "(";
-		std:: cout << (*waitingPassenger_)[i] ->ReturnDestination()+1 << ") ";
+		std:: cout << (*waitingPassenger_)[i] ->get_name() << "(";
+		std:: cout << (*waitingPassenger_)[i] ->get_destination()+1 << ") ";
 	}
 }
 
